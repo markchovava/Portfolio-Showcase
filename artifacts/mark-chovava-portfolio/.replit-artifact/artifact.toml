@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Mark Chovava — Developer & Designer"
+description = "A motion-rich portfolio for Mark Chovava, a Harare-based full-stack developer and digital designer, showcasing 10+ years of work across web development, design, and digital delivery."
+version = "1.0.0"
+id = "artifacts/mark-chovava-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18222
+
+[services.development]
+run = "pnpm --filter @workspace/mark-chovava-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/mark-chovava-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/mark-chovava-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18222"
+BASE_PATH = "/"
